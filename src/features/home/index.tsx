@@ -1,5 +1,5 @@
 
-import BlogList from "./components/BlogList";
+import BlogList from "./components/Bloglist";
 import Jumbotron from "./components/Jumbotron";
 
 const HomePage = () => {
@@ -7,9 +7,7 @@ const HomePage = () => {
     <main className="container mx-auto px-4">
       <Jumbotron />
       <BlogList />
-      {/* JUMBOTRON
-    BLOG LIST
-    PAGINATION */}
+   
     </main>
   );
 };
