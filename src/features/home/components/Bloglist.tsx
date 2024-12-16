@@ -2,6 +2,7 @@
 
 import useGetBlogs from "@/hooks/api/blog/useGetBlogs";
 import BlogCard from "./BlogCard";
+
 import { useState } from "react";
 import PaginationSection from "@/components/PaginationSection";
 
@@ -36,6 +37,7 @@ const BlogList = () => {
         total={data.meta.total}
       />
     </>
+
   );
 };
 

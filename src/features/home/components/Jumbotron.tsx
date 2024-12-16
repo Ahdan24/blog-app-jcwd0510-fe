@@ -1,3 +1,4 @@
+
 const Jumbotron = () => {
   return (
     <section className="mt-20 flex flex-col items-center">
@@ -8,3 +9,4 @@ const Jumbotron = () => {
 };
 
 export default Jumbotron;
+

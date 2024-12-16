@@ -1,3 +1,4 @@
+
 import { axiosInstance } from "@/lib/axios";
 import { Blog } from "@/types/blog";
 import { PageableTables, PaginationQueries } from "@/types/pagination";
@@ -19,3 +20,4 @@ const useGetBlogs = (queries: GetBlogsQuery) => {
 };
 
 export default useGetBlogs;
+

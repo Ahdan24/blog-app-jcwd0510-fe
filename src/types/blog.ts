@@ -8,4 +8,5 @@ export interface Blog {
   content: string;
   createdAt: Date;
   updatedAt: Date;
+
 }
