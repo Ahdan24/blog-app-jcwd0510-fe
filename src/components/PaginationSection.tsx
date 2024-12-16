@@ -12,7 +12,10 @@ import { PaginationMeta } from "@/types/pagination";
 import { FC } from "react";
 
 interface PaginationSectionProps extends PaginationMeta {
-    onChangePage: (page: number) => void
+
+  onChangePage: (page: number) => void;
+
+
 }
 
 const PaginationSection: FC<PaginationSectionProps> = ({
@@ -22,35 +25,40 @@ const PaginationSection: FC<PaginationSectionProps> = ({
   onChangePage,
 }) => {
 
-const hadlePrev = () => {
+  const handlePrev = () => {
     if (page > 1) {
-        onChangePage(page=-1)
+      onChangePage(page - 1);
     }
-}
+  };
 
-const hadleNext = () => {
-    if (page > Math.ceil(total/take)) {
-        onChangePage(page=+1)
+  const handleNext = () => {
+    if (page < Math.ceil(total / take)) {
+      onChangePage(page + 1);
     }
-}
+  };
 
   return (
-    <Pagination className="mt-12">
+    <Pagination className="my-12">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={hadlePrev} />
+          <PaginationPrevious onClick={handlePrev} />
+
         </PaginationItem>
 
         <PaginationItem>
           <PaginationLink>{page}</PaginationLink>
         </PaginationItem>
 
-        <PaginationItem>
-          <PaginationNext onClick={hadleNext}/>
+        <PaginationIt
+          <PaginationNext onClick={handleNext} />
+
         </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
 };
 
+
 export default PaginationSection;
+=======
+

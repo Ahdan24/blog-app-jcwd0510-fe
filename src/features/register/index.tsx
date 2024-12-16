@@ -1,12 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useRegister from "@/hooks/api/auth/useRegister";
 import { useFormik } from "formik";
-import { RegisterSchema } from "./schema";
+import { RegisterSchema } from "./schemas";
 
 const RegisterPage = () => {
   const { mutateAsync: register, isPending } = useRegister();
@@ -27,7 +27,7 @@ const RegisterPage = () => {
     <main className="flex justify-center pt-20">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Sign Up</CardTitle>
+          <CardTitle>Sign up</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={formik.handleSubmit}>
@@ -37,7 +37,7 @@ const RegisterPage = () => {
                 <Input
                   name="name"
                   type="text"
-                  placeholder="Name"
+                  placeholder="Name of your project"
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}

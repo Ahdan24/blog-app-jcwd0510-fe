@@ -1,12 +1,12 @@
 "use client";
 
 import { axiosInstance } from "@/lib/axios";
-import { useAppDispatch } from "@/redux/hooks";
-import { loginAction } from "@/redux/slices/userSlice";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "@/redux/hooks";
+import { loginAction } from "@/redux/slices/userSlice";
+import { useRouter } from "next/navigation";
 
 interface LoginPayload {
   email: string;
@@ -23,9 +23,9 @@ const useLogin = () => {
       return data;
     },
     onSuccess: (data) => {
-      toast.success("Login Success");
-      dispatch(loginAction(data)); // masukkin data ke global state
-      localStorage.setItem("blog-storage", JSON.stringify(data)); // masukkin data ke localStorage
+      toast.success("Login success");
+      dispatch(loginAction(data));
+      localStorage.setItem("blog-storage", JSON.stringify(data));
       router.replace("/");
     },
     onError: (error: AxiosError<any>) => {
@@ -35,3 +35,20 @@ const useLogin = () => {
 };
 
 export default useLogin;
+
+// CARA MANUAL
+// const useRegister = () => {
+//   const [isLoading, setLoading] = useState<Boolean>(false);
+
+//   const handleRegister = async (payload) => {
+//     try {
+//       const { data } = await axios.post("http:localhost:8000", payload);
+//       toast.success("Register success");
+//     } catch (error) {
+//       console.log(error);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+//   return {};
+// };

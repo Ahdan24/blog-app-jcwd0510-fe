@@ -3,7 +3,7 @@
 const LoadingScreen = () => {
   return (
     <main className="flex h-screen items-center justify-center">
-      Loading..
+      Processing...
     </main>
   );
 };

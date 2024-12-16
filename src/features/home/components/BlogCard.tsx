@@ -46,3 +46,4 @@ const BlogCard: FC<BlogCardProps> = ({ blog }) => {
 };
 
 export default BlogCard;
+

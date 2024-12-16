@@ -3,22 +3,21 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutAction } from "@/redux/slices/userSlice";
 import Link from "next/link";
-import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter(); // kalau mau setelah logout page berubah ke login page
+  const router = useRouter();
   const user = useAppSelector((state) => state.user);
 
   const logout = () => {
     localStorage.removeItem("blog-storage");
     dispatch(logoutAction());
-    router.push("/login"); // kalau mau setelah logout page berubah ke login page
+    router.push("/login");
   };
 
   return (
-    <nav className="bg-slate-200">
+    <nav className="bg-slate-400">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           <Link href="/" className="text-xl font-bold">
@@ -29,8 +28,12 @@ const Navbar = () => {
             <Link href="/">Home</Link>
             <Link href="/">Profile</Link>
             {!user.id && <Link href="/login">Sign In</Link>}
-            {!!user.id && <Button onClick={logout}>Logout</Button>}
-            {/* {user.id ? <p>Logout</p> : <Link href="/">Sign In</Link>} bisa juga seperti ini */}
+            {Boolean(user.id) && <p onClick={logout}>Logout</p>}
+            {/* {user.id ? (
+              <p onClick={logout}>Logout</p>
+            ) : (
+              <Link href="/login">Sign In</Link>
+            )} */}
           </div>
         </div>
       </div>

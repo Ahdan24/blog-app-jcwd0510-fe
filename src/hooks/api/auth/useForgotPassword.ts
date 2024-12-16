@@ -3,8 +3,10 @@
 import { axiosInstance } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "@/redux/hooks";
+import { loginAction } from "@/redux/slices/userSlice";
+import { useRouter } from "next/navigation";
 
 interface ForgotPasswordPayload {
   email: string;
@@ -12,6 +14,7 @@ interface ForgotPasswordPayload {
 
 const useForgotPassword = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   return useMutation({
     mutationFn: async (payload: ForgotPasswordPayload) => {
@@ -21,8 +24,8 @@ const useForgotPassword = () => {
       );
       return data;
     },
-    onSuccess: () => {
-      toast.success("Check your email");
+    onSuccess: (data) => {
+      toast.success("Please check your email!");
       router.push("/");
     },
     onError: (error: AxiosError<any>) => {
@@ -32,3 +35,20 @@ const useForgotPassword = () => {
 };
 
 export default useForgotPassword;
+
+// CARA MANUAL
+// const useRegister = () => {
+//   const [isLoading, setLoading] = useState<Boolean>(false);
+
+//   const handleRegister = async (payload) => {
+//     try {
+//       const { data } = await axios.post("http:localhost:8000", payload);
+//       toast.success("Register success");
+//     } catch (error) {
+//       console.log(error);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+//   return {};
+// };
