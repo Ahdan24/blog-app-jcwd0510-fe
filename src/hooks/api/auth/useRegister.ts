@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import  { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
