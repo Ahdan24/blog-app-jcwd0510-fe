@@ -7,5 +7,5 @@ export interface Blog {
   userId: number;
   content: string;
   createdAt: Date;
-  updateAt: Date;
+  updatedAt: Date;
 }

@@ -1,16 +1,15 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormik } from "formik";
-import { Button } from "@/components/ui/button";
+import { ForgotPasswordSchema } from "./schema";
 import useForgotPassword from "@/hooks/api/auth/useForgotPassword";
-import { ForgotPasswordSchema } from "./schemas";
 
 const ForgotPasswordPage = () => {
   const { mutateAsync: forgotPassword, isPending } = useForgotPassword();
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -20,6 +19,7 @@ const ForgotPasswordPage = () => {
       await forgotPassword(values);
     },
   });
+
   return (
     <main className="flex justify-center pt-20">
       <Card className="w-[350px]">

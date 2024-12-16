@@ -4,13 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormik } from "formik";
-import { LoginSchema } from "./schemas";
+import { LoginSchema } from "./schema";
 import { Button } from "@/components/ui/button";
 import useLogin from "@/hooks/api/auth/useLogin";
 
 const LoginPage = () => {
   const { mutateAsync: login, isPending } = useLogin();
-
   const formik = useFormik({
     initialValues: {
       email: "",
