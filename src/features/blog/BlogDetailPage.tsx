@@ -10,18 +10,18 @@ import ModalDelete from "./components/ModalDelete";
 import useDeleteBlog from "@/hooks/api/blog/useDeleteBlog";
 import { useAppSelector } from "@/redux/hooks";
 import Markdown from "@/components/ui/Markdown";
+import { useSession } from "next-auth/react";
 
 interface BlogDetailPageProps {
   blogId: number;
 }
 
 const BlogDetailPage: FC<BlogDetailPageProps> = ({ blogId }) => {
+  const session = useSession();
   const { data, isPending: isPendingGet } = useGetBlog(blogId);
 
   const { mutateAsync: deleteBlog, isPending: isPendingDelete } =
     useDeleteBlog();
-
-  const { id } = useAppSelector((state) => state.user);
 
   const onClickDeleteBlog = async () => {
     await deleteBlog(blogId);
@@ -38,17 +38,20 @@ const BlogDetailPage: FC<BlogDetailPageProps> = ({ blogId }) => {
   return (
     <main className="container mx-auto mt-4 max-w-5xl px-4">
       <section className="mb-4 space-y-2">
-        <Badge>{data.category}</Badge>
+        <Badge  variant="outline"
+            className="rounded-sm bg-green-100 text-green-600">{data.category}</Badge>
 
         <h1 className="text-3xl font-semibold">{data.title}</h1>
         <div className="flex items-center justify-between">
           <p>
             {format(new Date(data.createdAt), "dd MMM yyyy")} - {data.user.name}
           </p>
-          {id === data.userId && 
-          <ModalDelete
-          onClick={onClickDeleteBlog}
-          isPending={isPendingDelete} />}
+          {Number(session.data?.user.id) === data.userId && (
+            <ModalDelete
+              onClick={onClickDeleteBlog}
+              isPending={isPendingDelete}
+            />
+          )}
         </div>
 
         <div className="relative h-[200px] bg-gray-500 md:h-[400px]">
