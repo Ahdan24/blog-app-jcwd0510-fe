@@ -15,14 +15,15 @@ import { FC } from "react";
 
 interface ModalDeleteProps {
   onClick: () => void;
+  isPending: boolean
 }
 
-const ModalDelete: FC<ModalDeleteProps> = ({ onClick }) => {
+const ModalDelete: FC<ModalDeleteProps> = ({ onClick, isPending }) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger disabled={isPending}>
         {" "}
-        <Button variant="outline" size="icon" className="hover:bg-red-500">
+        <Button variant="outline" size="icon" className="hover:bg-red-500" disabled={isPending}>
           <Trash />
         </Button>
       </AlertDialogTrigger>
