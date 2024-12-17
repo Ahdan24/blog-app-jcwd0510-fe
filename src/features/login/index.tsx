@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { LoginSchema } from "./schema";
 import { Button } from "@/components/ui/button";
 import useLogin from "@/hooks/api/auth/useLogin";
+import { Link } from "lucide-react";
 
 const LoginPage = () => {
   const { mutateAsync: login, isPending } = useLogin();
@@ -65,6 +66,7 @@ const LoginPage = () => {
             <Button type="submit" className="mt-4 w-full" disabled={isPending}>
               {isPending ? "Loading..." : "Login"}
             </Button>
+            <Link className="mt-4 flex justify-center text-xs" href="/register">Don't Have an account? Register Here!</Link>
           </form>
         </CardContent>
       </Card>

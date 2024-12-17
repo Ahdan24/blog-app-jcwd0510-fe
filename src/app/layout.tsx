@@ -1,4 +1,6 @@
 import Navbar from "@/components/Navbar";
+import NextAuthProvider from "@/providers/NextAuthProvider";
+import NuqProvider from "@/providers/NuqsProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
@@ -7,8 +9,6 @@ import localFont from "next/font/local";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import NextAuthProvider from "@/providers/NextAuthProvider";
-import {NuqsAdapter} from "nuqs/adapters/next/app"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthProvider>
-            <NuqsAdapter>
+            <NuqProvider>
           <StoreProvider>
             <ReactQueryProvider>
               <Navbar />
@@ -51,7 +51,7 @@ export default function RootLayout({
             </ReactQueryProvider>
             <ToastContainer />
           </StoreProvider>
-          </NuqsAdapter>
+          </NuqProvider>
         </NextAuthProvider>
         </ThemeProvider>
       </body>
