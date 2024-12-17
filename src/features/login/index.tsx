@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { LoginSchema } from "./schema";
 import { Button } from "@/components/ui/button";
 import useLogin from "@/hooks/api/auth/useLogin";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 const LoginPage = () => {
   const { mutateAsync: login, isPending } = useLogin();
