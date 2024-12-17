@@ -11,7 +11,7 @@ export interface PaginationMeta {
   total: number;
 }
 
-export interface PageableTables<T> {
+export interface PageableResponse<T> {
   data: T[];
   meta: PaginationMeta;
 }
