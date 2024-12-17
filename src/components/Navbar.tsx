@@ -8,39 +8,36 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logoutAction } from "@/redux/slices/userSlice";
 import { Menu } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToggleDarkMode } from "./ToggleDarkMode";
 
 const Navbar = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
-  const user = useAppSelector((state) => state.user);
+  const { data } = useSession();
 
-  const logout = () => {
-    localStorage.removeItem("blog-storage");
-    dispatch(logoutAction());
-  };
+  const user = data?.user;
+
+  const logout = () => signOut();
 
   return (
-    <nav>
+    <nav className="sticky top-0">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           <Link href="/" className="text-xl font-bold">
-            Blog<span className="bg-orange-500">Hub</span>
+            Phone<span className="bg-orange-500">Hub</span>
           </Link>
 
           <div className="hidden cursor-pointer items-center gap-8 font-medium md:flex">
-            <Link href="/">Home</Link>
-            <Link href="/">Profile</Link>
-            {!user.id && <Link href="/login">Sign in</Link>}
-            {!!user.id && (
+            <Link href="/"  className="hover:text-orange-500">Home</Link>
+            <Link href="/"  className="hover:text-orange-500">Profile</Link>
+            {!user?.id && <Link href="/login">Sign in</Link>}
+            {!!user?.id && (
               <>
-                <p onClick={() => router.push("/write")}>Write</p>
-                <p onClick={logout}>Logout</p>
+                <p onClick={() => router.push("/write")}  className="hover:text-orange-500">Write</p>
+                <p onClick={logout} className="hover:text-orange-500">Logout</p>
               </>
             )}
             <ToggleDarkMode />
@@ -62,12 +59,12 @@ const Navbar = () => {
                   <Link href="/">Profile</Link>
                 </DropdownMenuItem>
 
-                {!user.id && (
+                {!user?.id && (
                   <DropdownMenuItem>
                     <Link href="/login">Sign in</Link>
                   </DropdownMenuItem>
                 )}
-                {!!user.id && (
+                {!!user?.id && (
                   <>
                     <DropdownMenuItem>
                       <>

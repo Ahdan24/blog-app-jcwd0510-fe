@@ -7,11 +7,12 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useDebounceValue } from "usehooks-ts";
 import { FileMinus2 } from "lucide-react";
+import { parseAsInteger, useQueryState } from 'nuqs'
 
 const BlogList = () => {
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useQueryState("page",parseAsInteger.withDefault(1) );
 
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useQueryState("search", {defaultValue: ""});
 
   const [debouncedValue] = useDebounceValue(search, 500);
 
@@ -24,9 +25,12 @@ const BlogList = () => {
   return (
     <>
       <Input
-        className="mx-auto my-4 max-w-2xl"
+        className="mx-auto my-4 max-w-2xl rounded-full p-6 border border-orange-500"
         placeholder="Search"
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) =>{
+          setPage(1)
+          setSearch(e.target.value)
+        }}
         value={search}
       />
 

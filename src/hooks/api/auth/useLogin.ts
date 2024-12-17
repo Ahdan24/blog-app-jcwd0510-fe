@@ -4,9 +4,8 @@ import { axiosInstance } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "@/redux/hooks";
-import { loginAction } from "@/redux/slices/userSlice";
 import { useRouter } from "next/navigation";
+import {signIn} from "next-auth/react" //hanya bisa dipakai client side
 
 interface LoginPayload {
   email: string;
@@ -15,17 +14,15 @@ interface LoginPayload {
 
 const useLogin = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   return useMutation({
     mutationFn: async (payload: LoginPayload) => {
       const { data } = await axiosInstance.post("/auth/login", payload);
       return data;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       toast.success("Login success");
-      dispatch(loginAction(data));
-      localStorage.setItem("blog-storage", JSON.stringify(data));
+      await signIn("credentials", {...data, redirect:false})
       router.replace("/");
     },
     onError: (error: AxiosError<any>) => {

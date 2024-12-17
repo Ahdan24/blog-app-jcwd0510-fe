@@ -13,7 +13,7 @@ interface BlogCardProps {
 const BlogCard: FC<BlogCardProps> = ({ blog }) => {
   return (
     <Link href={`/blogs/${blog.id}`}>
-    <Card>
+    <Card className="h-full border">
       <CardHeader>
         <div className="relative h-[220px] w-full overflow-hidden rounded-lg">
           <Image
@@ -39,7 +39,7 @@ const BlogCard: FC<BlogCardProps> = ({ blog }) => {
             {format(blog.createdAt, "dd MMM yyyy")}
           </Badge>
         </div>
-
+        <p className="my-1 text-sm font-light">{blog.user.name}</p>
         <h2 className="my-2 line-clamp-2 text-lg font-bold">{blog.title}</h2>
         <p className="line-clamp-4">{blog.description}</p>
       </CardContent>
